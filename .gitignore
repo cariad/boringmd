@@ -1,3 +1,6 @@
 __pycache__
 .coverage
 .mypy_cache
+boringmd.egg-info
+dist
+htmlcov
