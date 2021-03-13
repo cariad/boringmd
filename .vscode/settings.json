@@ -6,6 +6,7 @@
     "codecov",
     "epilog",
     "lstr",
+    "pathlib",
     "pipenv",
     "pipfile",
     "pytest",
