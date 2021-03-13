@@ -43,7 +43,7 @@ setup(
     description="Converts Markdown to boring plain text",
     entry_points={
         "console_scripts": [
-            "boringmd=boringmd.__main__",
+            "boringmd=boringmd.__main__:cli_entry",
         ],
     },
     include_package_data=True,

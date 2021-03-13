@@ -1,4 +1,7 @@
 from boringmd.invoke import invoke
 
+def cli_entry() -> int:
+    return invoke()
+
 if __name__ == "__main__":
-    invoke()
+    cli_entry()
