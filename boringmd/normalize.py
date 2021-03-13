@@ -18,7 +18,7 @@ def from_file(path: Path) -> str:
         Conversion to plain text.
     """
     with open(path, "r") as stream:
-        return from_string(stream.read())
+        return from_string(stream.read()) + "\n"
 
 
 def from_string(document: str) -> str:
@@ -54,4 +54,4 @@ def from_string(document: str) -> str:
     for index in reversed(delete):
         del lines[index]
 
-    return "\n".join([str(line) for line in lines]) + "\n"
+    return "\n".join([str(line) for line in lines])
