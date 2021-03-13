@@ -31,20 +31,28 @@ def from_string(document: str) -> str:
     Returns:
         Conversion to plain text.
     """
-    c = chain()
+
+    transformers = chain()
     delete: List[int] = []
     lines = [lstr(line) for line in document.splitlines()]
     logger = getLogger()
+
     for index in range(len(lines)):
-        for transformer in c:
-            logger.debug("Normalising: %s", lines[index])
-            if result := transformer.transform(index, lines[index]):
-                if result.stop:
-                    break
-                elif result.delete:
-                    delete.append(index)
-                elif result.line:
-                    lines[index] = result.line
+        index_str = "#" + str(index).rjust(len(str(len(lines))), "0")
+        logger.debug("Starting chain for %s: %s", index_str, lines[index])
+
+        for transformer in transformers:
+            logger.debug("Transforming %s with %s.", index_str, transformer.name)
+            line_change = transformer.transform(index, lines[index])
+
+            if line_change.line is None:
+                logger.debug("Deleting %s.", index_str)
+                delete.append(index)
+            else:
+                lines[index] = line_change.line
+
+            if line_change.stop:
+                break
 
     for index in reversed(delete):
         del lines[index]
