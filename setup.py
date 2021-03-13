@@ -47,6 +47,9 @@ setup(
         ],
     },
     include_package_data=True,
+    install_requires=[
+        "lstr~=1.0",
+    ],
     license="MIT License",
     long_description=long_description,
     long_description_content_type="text/markdown",
