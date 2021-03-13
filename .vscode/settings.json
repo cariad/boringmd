@@ -4,6 +4,8 @@
     "boringmd",
     "cariad",
     "codecov",
+    "epilog",
+    "lstr",
     "pipenv",
     "pipfile",
     "pytest",
@@ -11,5 +13,6 @@
     "virtualenvs",
     "wheel",
     "yamllint"
-  ]
+  ],
+  "python.pythonPath": ".venv/bin/python3.9"
 }
