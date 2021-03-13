@@ -43,16 +43,13 @@ def from_string(document: str) -> str:
 
         for transformer in transformers:
             logger.debug("Transforming %s with %s.", index_str, transformer.name)
-            line_change = transformer.transform(index, lines[index])
-
-            if line_change.line is None:
-                logger.debug("Deleting %s.", index_str)
-                delete.append(index)
-            else:
-                lines[index] = line_change.line
-
-            if line_change.stop:
-                break
+            if line_guidance := transformer.transform(index, lines[index]):
+                if line_guidance.delete:
+                    logger.debug("Deleting %s.", index_str)
+                    delete.append(index)
+                    break
+                elif line_guidance.stop:
+                    break
 
     for index in reversed(delete):
         del lines[index]
