@@ -18,7 +18,7 @@ def from_file(path: Path) -> str:
         Conversion to plain text.
     """
     with open(path, "r") as stream:
-        return from_string(stream.read()) + "\n"
+        return from_string(stream.read())
 
 
 def from_string(document: str) -> str:

@@ -57,7 +57,7 @@ jobs:
 
       - run: pip install "$(ls *.whl)"
       - run: boringmd ./tests/documents/smoke.md > generated.txt
-      - run: cmp --silent ./tests/documents/smoke.txt generated.txt && exit 1
+      - run: cmp ./tests/documents/smoke.txt generated.txt
 
 # publish_to_github:
 #   if: startsWith(github.ref, 'refs/tags')
