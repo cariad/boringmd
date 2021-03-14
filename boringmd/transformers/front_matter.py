@@ -12,7 +12,7 @@ class FrontMatterTransformer(Transformer):
 
     def __init__(self) -> None:
         self.inside = False
-        self.logger = getLogger()
+        self.logger = getLogger("boringmd")
 
     def transform(self, line_number: int, line: lstr) -> Optional[LineGuidance]:
         """
