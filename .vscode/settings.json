@@ -1,0 +1,24 @@
+{
+  "cSpell.words": [
+    "bdist",
+    "boringmd",
+    "bruceadams",
+    "cariad",
+    "codecov",
+    "epilog",
+    "lstr",
+    "pathlib",
+    "pipenv",
+    "pipfile",
+    "pypa",
+    "pypi",
+    "pytest",
+    "refs",
+    "token",
+    "venv",
+    "virtualenvs",
+    "wheel",
+    "yamllint"
+  ],
+  "python.pythonPath": ".venv/bin/python3.9"
+}
