@@ -35,7 +35,7 @@ def from_string(document: str) -> str:
     transformers = chain()
     delete: List[int] = []
     lines = [lstr(line) for line in document.splitlines()]
-    logger = getLogger()
+    logger = getLogger("boringmd")
 
     for index in range(len(lines)):
         index_str = "#" + str(index).rjust(len(str(len(lines))), "0")

@@ -22,7 +22,7 @@ classifiers = [
     "Topic :: Text Processing :: Filters",
     "Topic :: Text Processing :: Markup :: Markdown",
     "Topic :: Utilities",
-    # "Typing :: Typed",
+    "Typing :: Typed",
 ]
 
 version = get_version()

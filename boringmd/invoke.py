@@ -17,7 +17,7 @@ def invoke(args: Optional[List[str]] = None) -> int:
     """
 
     basicConfig(format="%(message)s")
-    logger = getLogger()
+    logger = getLogger("boringmd")
 
     arg_parser = ArgumentParser(
         "boringmd",

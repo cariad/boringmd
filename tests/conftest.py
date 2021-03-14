@@ -6,7 +6,7 @@ from pytest import fixture
 @fixture
 def logger() -> Logger:
     basicConfig()
-    logger = getLogger()
+    logger = getLogger("boringmd")
     logger.setLevel(DEBUG)
     getLogger("lstr").setLevel(INFO)
     return logger
