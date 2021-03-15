@@ -14,3 +14,15 @@ def test__exception(text_from_file: Mock) -> None:
 
 def test__file_not_found() -> None:
     assert invoke(["foo"]) == 2
+
+
+def test__front_matter() -> None:
+    assert invoke(["--front-matter", "./tests/documents/smoke.md"]) == 0
+
+
+def test__no_path() -> None:
+    assert invoke() == 3
+
+
+def test__version() -> None:
+    assert invoke(["--version"]) == 0
