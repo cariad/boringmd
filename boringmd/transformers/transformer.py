@@ -29,4 +29,3 @@ class Transformer(ABC):
         Returns:
             Guidance (if any) for further transformation.
         """
-        pass
