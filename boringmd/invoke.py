@@ -2,7 +2,9 @@ from argparse import ArgumentParser
 from logging import basicConfig, getLogger, root
 from typing import List, Optional
 
-from boringmd.normalize import from_file
+from boringmd.front_matter import front_matter_from_file
+from boringmd.normalize import text_from_file
+from boringmd.version import get_version
 
 
 def invoke(args: Optional[List[str]] = None) -> int:
@@ -21,15 +23,31 @@ def invoke(args: Optional[List[str]] = None) -> int:
 
     arg_parser = ArgumentParser(
         "boringmd",
-        usage="boringmd exciting.md > boring.txt",
-        description="Converts Markdown to boring plain text.",
-        epilog="Made with ❤️ by Cariad Eccleston: https://cariad.io",
+        description="Extracts boring plain text and front matter from Markdown.",
+        epilog=(
+            "Made with ❤️ by Cariad Eccleston: "
+            + "https://github.com/cariad/boringmd • "
+            + "https://cariad.io"
+        ),
     )
 
     arg_parser.add_argument(
         "markdown",
         help="Path to Markdown file",
         metavar="PATH",
+        nargs="?",
+    )
+
+    arg_parser.add_argument(
+        "--front-matter",
+        action="store_true",
+        help="print front matter only",
+    )
+
+    arg_parser.add_argument(
+        "--version",
+        action="store_true",
+        help="print version",
     )
 
     arg_parser.add_argument(
@@ -43,8 +61,20 @@ def invoke(args: Optional[List[str]] = None) -> int:
     root.setLevel(parsed_args.log_level.upper())
 
     try:
-        print(from_file(parsed_args.markdown))
+        if parsed_args.version:
+            print(get_version())
+            return 0
+
+        if not parsed_args.markdown:
+            logger.error("Path to Markdown file is required.")
+            return 3
+
+        if parsed_args.front_matter:
+            print(front_matter_from_file(parsed_args.markdown))
+        else:
+            print(text_from_file(parsed_args.markdown))
         return 0
+
     except FileNotFoundError as ex:
         logger.error('"%s" not found.', ex.filename)
         return 2

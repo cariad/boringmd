@@ -3,6 +3,7 @@ from typing import Optional
 
 from lstr import lstr
 
+from boringmd.front_matter import line_delimiter
 from boringmd.line_guidance import LineGuidance
 from boringmd.transformers.transformer import Transformer
 
@@ -11,7 +12,7 @@ class FrontMatterTransformer(Transformer):
     """ Removes front matter. """
 
     def __init__(self) -> None:
-        self.inside = False
+        self.inside: Optional[str] = None
         self.logger = getLogger("boringmd")
 
     def transform(self, line_number: int, line: lstr) -> Optional[LineGuidance]:
@@ -30,14 +31,21 @@ class FrontMatterTransformer(Transformer):
             return None
 
         if line_number == 0:
-            if line == "---":
-                self.inside = True
-                self.logger.debug('Deleting "%s" because it starts front matter.', line)
-                return LineGuidance(delete=True)
-            return None
+            d = line_delimiter(str(line))
+            if not d:
+                # Didn't find a delimiter on this first line, so don't change it.
+                return None
 
-        if line == "---":
-            self.inside = False
+            self.inside = d.plain
+            self.logger.debug(
+                'Deleting "%s" because it starts front matter with delimiter "%s"',
+                line,
+                self.inside,
+            )
+            return LineGuidance(delete=True)
+
+        if self.inside and line == self.inside:
+            self.inside = None
 
         self.logger.debug('Deleting "%s" because it\'s front matter.', line)
         return LineGuidance(delete=True)
