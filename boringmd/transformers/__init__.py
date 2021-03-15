@@ -7,9 +7,9 @@ from boringmd.transformers.heading import HeadingTransformer
 from boringmd.transformers.html import HtmlTransformer
 from boringmd.transformers.indented_code import IndentedCodeTransformer
 from boringmd.transformers.inline_code import InlineCodeTransformer
+from boringmd.transformers.line import LineTransformer
 from boringmd.transformers.strong import StrongTransformer
 from boringmd.transformers.transformer import Transformer
-from boringmd.transformers.line import LineTransformer
 
 __all__ = ["chain"]
 
