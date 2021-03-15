@@ -1,154 +1,8 @@
 # boringmd
 
-`boringmd` is a Python package and command line tool for converting Markdown documents to plain text.
+`boringmd` is a Python package and command line tool for extracting plain text and front matter from Markdown.
 
-`boringmd` does _not_ render Markdown in any particularly beautiful way. It's a lightweight package for simply extracting plain text content.
-
-## Examples
-
-Each example below shows a snippet of Markdown and how it will be transformed to plain text.
-
-### Emphasis
-
-```markdown
-This is *emphasis*, and so is _this_.
-```
-
-```text
-This is emphasis, and so is this.
-```
-
-### Fenced code
-
-````markdown
-Code sample:
-
-```markdown
-# Shopping list
-
-1. Ducks
-2. Grapes
-3. Basketballs
-```
-````
-
-```text
-Code sample:
-
-# Shopping list
-
-1. Ducks
-2. Grapes
-3. Basketballs
-```
-
-### Front matter
-
-```markdown
----
-foo: bar
----
-I love gummy cakes.
-```
-
-```text
-I love gummy cakes.
-```
-
-### Headings
-
-```markdown
-# Abraham Lincoln
-
-## Life
-
-### Favourite cakes
-
-Abraham Lincoln might have enjoyed gummy cakes.
-
-```
-
-```text
-Abraham Lincoln
-
-Life
-
-Favourite cakes
-
-Abraham Lincoln might have enjoyed gummy cakes.
-```
-
-### HTML
-
-```markdown
-I want a line break<br />here.
-```
-
-```text
-I want a line break here.
-```
-
-### Indented code
-
-```markdown
-Code sample:
-
-    # Shopping list
-
-    1. Ducks
-    2. Grapes
-    3. Basketballs
-```
-
-```text
-Code sample:
-
-    # Shopping list
-
-    1. Ducks
-    2. Grapes
-    3. Basketballs
-```
-
-### Inline code
-
-```markdown
-Use `git` to clone and `pytest` to test.
-```
-
-```text
-Use git to clone and pytest to test.
-```
-
-### Line
-
-```markdown
-This paragraph is separated from the next.
-
----
-
-This paragraph is separated from the previous.
-```
-
-```text
-This paragraph is separated from the next.
-
-This paragraph is separated from the previous.
-```
-
-### Strength
-
-```markdown
-This is **strong**.
-```
-
-```text
-This is strong.
-```
-
-## Usage
-
-### Installation
+## Installation
 
 `boringmd` requires Python 3.8 or later.
 
@@ -156,29 +10,40 @@ This is strong.
 pip install boringmd
 ```
 
-### Command line
+## Command line
 
-On the command line, `boringmd` prints the conversion to stdout:
+Pass the filename of a Markdown document to extract its plain text content:
 
 ```bash
 boringmd input.md
 ```
 
-To write the conversion to a file, redirect it:
+To extract the front matter only, include the `--front-matter` flag:
+
+```bash
+boringmd input.md --front-matter
+```
+
+`boringmd` prints to stdout. To write the extraction to a file, redirect it:
 
 ```bash
 boringmd input.md > output.txt
 ```
 
-### Package
+## Package
 
 ```python
-from boringmd import text_from_string
-print(text_from_string("**foo** and _bar_"))
+from boringmd import front_matter_from_string, text_from_string
+markdown = "---\nfoo: bar\n---\n**foo** and _bar_"
+print(text_from_string(markdown))
+# foo and bar
+print(front_matter_from_string(markdown))
+# foo: bar
 
 from pathlib import Path
-from boringmd import text_from_file
+from boringmd import front_matter_from_file, text_from_file
 print(text_from_file(Path("input.md")))
+print(front_matter_from_file(Path("input.md")))
 ```
 
 ## Related packages

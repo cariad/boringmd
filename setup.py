@@ -40,7 +40,7 @@ setup(
     author="Cariad Eccleston",
     author_email="cariad@hey.com",
     classifiers=classifiers,
-    description="Converts Markdown to boring plain text",
+    description="Extract plain text and front matter from Markdown",
     entry_points={
         "console_scripts": [
             "boringmd=boringmd.__main__:cli_entry",

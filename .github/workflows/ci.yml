@@ -55,8 +55,12 @@ jobs:
           name: distributable
 
       - run: pip install "$(ls *.whl)"
+
       - run: boringmd ./tests/documents/smoke.md > generated.txt
       - run: cmp ./tests/documents/smoke.txt generated.txt
+
+      - run: boringmd ./tests/documents/smoke.md --front-matter > generated.yml
+      - run: cmp ./tests/documents/smoke.yml generated.yml
 
   github:
     if: startsWith(github.ref, 'refs/tags')
