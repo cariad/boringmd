@@ -1,8 +1,23 @@
+from pathlib import Path
 from typing import Optional
 
 from pytest import mark
 
-from boringmd.front_matter import front_matter, line_delimiter
+from boringmd.front_matter import (
+    front_matter_from_file,
+    front_matter_from_string,
+    line_delimiter,
+)
+
+
+def test_front_matter_from_file() -> None:
+    for path in Path(__file__).parent.joinpath("documents").iterdir():
+        if path.is_file() and path.name.endswith(".md"):
+            try:
+                with open(path.with_suffix(".yml"), "r") as expect_stream:
+                    assert front_matter_from_file(path) == expect_stream.read().rstrip()
+            except FileNotFoundError:
+                assert front_matter_from_file(path) is None
 
 
 @mark.parametrize(
@@ -16,8 +31,8 @@ from boringmd.front_matter import front_matter, line_delimiter
         ("---\nfoo: bar\n", None),
     ],
 )
-def test_front_matter(md: str, expect: Optional[str]) -> None:
-    assert front_matter(md) == expect
+def test_front_matter_from_string(md: str, expect: Optional[str]) -> None:
+    assert front_matter_from_string(md) == expect
 
 
 @mark.parametrize(

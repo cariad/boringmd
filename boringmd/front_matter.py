@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from pathlib import Path
 from re import RegexFlag, match
 from typing import Optional
 
@@ -28,7 +29,7 @@ def document_delimiter(md: str) -> Optional[Delimiter]:
     return line_delimiter(md.splitlines()[0]) if md else None
 
 
-def front_matter(md: str) -> Optional[str]:
+def front_matter_from_string(md: str) -> Optional[str]:
     """
     Extracts the Markdown document front matter as a string.
 
@@ -49,6 +50,20 @@ def front_matter(md: str) -> Optional[str]:
     )
 
     return found.group(1) if found else None
+
+
+def front_matter_from_file(path: Path) -> Optional[str]:
+    """
+    Extracts the Markdown document front matter as a string.
+
+    Arguments:
+        path: Path to Markdown document.
+
+    Returns:
+        Front matter, if any.
+    """
+    with open(path, "r") as stream:
+        return front_matter_from_string(stream.read())
 
 
 def line_delimiter(line: str) -> Optional[Delimiter]:
