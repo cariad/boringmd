@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 from logging import basicConfig, getLogger, root
 from typing import List, Optional
 
-from boringmd.normalize import from_file
+from boringmd.normalize import text_from_file
 
 
 def invoke(args: Optional[List[str]] = None) -> int:
@@ -43,7 +43,7 @@ def invoke(args: Optional[List[str]] = None) -> int:
     root.setLevel(parsed_args.log_level.upper())
 
     try:
-        print(from_file(parsed_args.markdown))
+        print(text_from_file(parsed_args.markdown))
         return 0
     except FileNotFoundError as ex:
         logger.error('"%s" not found.', ex.filename)

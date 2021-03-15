@@ -1,3 +1,3 @@
-from boringmd.normalize import from_file, from_string
+from boringmd.normalize import text_from_file, text_from_string
 
-__all__ = ["from_file", "from_string"]
+__all__ = ["text_from_file", "text_from_string"]

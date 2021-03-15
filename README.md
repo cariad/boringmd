@@ -173,12 +173,12 @@ boringmd input.md > output.txt
 ### Package
 
 ```python
-from boringmd import from_string
-print(from_string("**foo** and _bar_"))
+from boringmd import text_from_string
+print(text_from_string("**foo** and _bar_"))
 
 from pathlib import Path
-from boringmd import from_file
-print(from_file(Path("input.md")))
+from boringmd import text_from_file
+print(text_from_file(Path("input.md")))
 ```
 
 ## Related packages
