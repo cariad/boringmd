@@ -9,6 +9,7 @@ from boringmd.transformers.indented_code import IndentedCodeTransformer
 from boringmd.transformers.inline_code import InlineCodeTransformer
 from boringmd.transformers.strong import StrongTransformer
 from boringmd.transformers.transformer import Transformer
+from boringmd.transformers.line import LineTransformer
 
 __all__ = ["chain"]
 
@@ -24,4 +25,5 @@ def chain() -> List[Transformer]:
         HtmlTransformer(),
         StrongTransformer(),
         EmphasisTransformer(),
+        LineTransformer(),
     ]

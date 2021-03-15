@@ -6,6 +6,8 @@
 
 ## Examples
 
+Each example below shows a snippet of Markdown and how it will be transformed to plain text.
+
 ### Emphasis
 
 ```markdown
@@ -116,6 +118,22 @@ Use `git` to clone and `pytest` to test.
 
 ```text
 Use git to clone and pytest to test.
+```
+
+### Line
+
+```markdown
+This paragraph is separated from the next.
+
+---
+
+This paragraph is separated from the previous.
+```
+
+```text
+This paragraph is separated from the next.
+
+This paragraph is separated from the previous.
 ```
 
 ### Strength
