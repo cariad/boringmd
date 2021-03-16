@@ -25,7 +25,7 @@ def invoke(args: Optional[List[str]] = None) -> int:
         "boringmd",
         description="Extracts boring plain text and front matter from Markdown.",
         epilog=(
-            "Made with ❤️ by Cariad Eccleston: "
+            "Made with \u2764 by Cariad Eccleston: "
             + "https://github.com/cariad/boringmd • "
             + "https://cariad.io"
         ),

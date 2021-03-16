@@ -38,7 +38,7 @@ def test_front_matter_from_string(md: str, expect: Optional[str]) -> None:
 @mark.parametrize(
     "line, plain, pattern",
     [
-        ("---", "---", "---"),
+        ("---", "---", r"\-\-\-"),
         ("+++", "+++", r"\+\+\+"),
     ],
 )

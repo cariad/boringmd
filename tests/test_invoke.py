@@ -21,7 +21,7 @@ def test__front_matter() -> None:
 
 
 def test__no_path() -> None:
-    assert invoke() == 3
+    assert invoke([]) == 3
 
 
 def test__version() -> None:

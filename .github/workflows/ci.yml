@@ -56,6 +56,9 @@ jobs:
 
       - run: pip install "$(ls *.whl)"
 
+      - run: boringmd --version | tee version.tmp
+      - run: grep -qF "${GITHUB_REF##*/}" version.tmp
+
       - run: boringmd ./tests/documents/smoke.md > generated.txt
       - run: cmp ./tests/documents/smoke.txt generated.txt
 
