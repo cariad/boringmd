@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from logging import getLogger
 from pathlib import Path
 from re import RegexFlag, match
 from typing import Optional
@@ -11,9 +12,11 @@ class Delimiter:
 
 
 FRONT_MATTER_DELIMITERS = [
-    Delimiter(plain="---", pattern=r"---"),
+    Delimiter(plain="---", pattern=r"\-\-\-"),
     Delimiter(plain="+++", pattern=r"\+\+\+"),
 ]
+
+logger = getLogger("boringmd")
 
 
 def document_delimiter(md: str) -> Optional[Delimiter]:
@@ -43,12 +46,10 @@ def front_matter_from_string(md: str) -> Optional[str]:
     if not delimiter:
         return None
 
-    found = match(
-        fr"{delimiter.pattern}\s(.+)\s{delimiter.pattern}",
-        md,
-        RegexFlag.DOTALL + RegexFlag.MULTILINE,
-    )
+    pattern = fr"{delimiter.pattern}\s([^{delimiter.pattern}]+)\s{delimiter.pattern}"
+    logger.debug("Pattern: %s", pattern)
 
+    found = match(pattern, md, RegexFlag.DOTALL + RegexFlag.MULTILINE)
     return found.group(1) if found else None
 
 
