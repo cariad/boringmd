@@ -58,7 +58,7 @@ jobs:
 
       - run: 'echo "Build version: $(boringmd --version)"'
       - run: 'echo "GitHub ref:    ${GITHUB_REF##*/}"'
-      - run: '[[ "$(boringmd --version)" == "${GITHUB_REF##*/}" ]] && exit 1'
+      - run: '[[ "$(boringmd --version)" != "${GITHUB_REF##*/}" ]] && exit 1'
 
       - run: boringmd ./tests/documents/smoke.md > generated.txt
       - run: cmp ./tests/documents/smoke.txt generated.txt
