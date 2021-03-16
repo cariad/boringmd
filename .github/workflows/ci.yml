@@ -57,7 +57,7 @@ jobs:
       - run: pip install "$(ls *.whl)"
 
       - run: 'echo "Build version: $(boringmd --version)"'
-      - run: 'echo "GitHub ref:    ${GITHUB_REF##*/}'
+      - run: 'echo "GitHub ref:    ${GITHUB_REF##*/}"'
       - run: '[[ "$(boringmd --version)" == "${GITHUB_REF##*/}" ]] && exit 1'
 
       - run: boringmd ./tests/documents/smoke.md > generated.txt
