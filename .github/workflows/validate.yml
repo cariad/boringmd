@@ -82,8 +82,6 @@ jobs:
 
       - name: Build the package
         run: poetry build
-          pip install "$(ls ./dist/*.whl)"
-          boringmd --version
 
       - name: Install the package
         run: pip install "$(ls ./dist/*.whl)"
