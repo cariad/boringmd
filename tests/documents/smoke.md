@@ -72,3 +72,11 @@ To run the tests: `pytest` then cross fingers.
 To run the tests: `git` then `pytest` then cross fingers.
 
 Don't transform inline HTML, like `foo<br />bar`.
+
+## Hyperlinks
+
+My homepage is at [cariad.earth](https://www.cariad.earth).
+
+I'm also on [GitHub](https://github.com/cariad) and [LinkedIn](https://www.linkedin.com/in/cariad).
+
+Brackets [before] [a hyperlink](.) (or after) shouldn't break the transformation.

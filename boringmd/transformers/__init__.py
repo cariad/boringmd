@@ -5,6 +5,7 @@ from boringmd.transformers.fenced_code import FencedCodeTransformer
 from boringmd.transformers.front_matter import FrontMatterTransformer
 from boringmd.transformers.heading import HeadingTransformer
 from boringmd.transformers.html import HtmlTransformer
+from boringmd.transformers.hyperlink import HyperlinkTransformer
 from boringmd.transformers.indented_code import IndentedCodeTransformer
 from boringmd.transformers.inline_code import InlineCodeTransformer
 from boringmd.transformers.line import LineTransformer
@@ -29,4 +30,5 @@ def chain() -> List[Transformer]:
         StrongTransformer(),
         EmphasisTransformer(),
         LineTransformer(),
+        HyperlinkTransformer(),
     ]
