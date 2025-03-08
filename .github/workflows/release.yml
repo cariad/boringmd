@@ -1,0 +1,43 @@
+name: Release
+
+on:  # yamllint disable-line rule:truthy
+  release:
+    types:
+      - published
+
+env:
+  latest-python-version: 3.13
+
+permissions:
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.latest-python-version }}
+
+      - uses: snok/install-poetry@v1.4.1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - id: cache
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-${{ env.latest-python-version }}-${{ hashFiles('**/poetry.lock') }}
+          path: .venv
+          restore-keys: |
+            ${{ runner.os }}-${{ env.latest-python-version }}-
+
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: poetry install
+
+      - run: poetry version ${{ github.event.release.name }}
+      - run: poetry build
+      - uses: pypa/gh-action-pypi-publish@release/v1

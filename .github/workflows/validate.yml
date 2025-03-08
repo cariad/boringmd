@@ -5,24 +5,19 @@ on:  # yamllint disable-line rule:truthy
     branches-ignore:
       - main
 
-permissions:
-  contents: read
+env:
+  latest-python-version: 3.13
 
 jobs:
   lint:
     runs-on: ubuntu-24.04
-
-    strategy:
-      matrix:
-        python-version:
-          - "3.13"
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ env.latest-python-version }}
 
       - uses: snok/install-poetry@v1.4.1
         with:
@@ -32,10 +27,10 @@ jobs:
       - id: cache
         uses: actions/cache@v4
         with:
-          key: ${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          key: ${{ runner.os }}-${{ env.latest-python-version }}-${{ hashFiles('**/poetry.lock') }}
           path: .venv
           restore-keys: |
-            ${{ runner.os }}-${{ matrix.python-version }}-
+            ${{ runner.os }}-${{ env.latest-python-version }}-
 
       - if: steps.cache.outputs.cache-hit != 'true'
         run: poetry install
