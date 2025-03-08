@@ -7,7 +7,9 @@ from boringmd.transformers.transformer import Transformer
 
 
 class HtmlTransformer(Transformer):
-    """ Removes HTML. """
+    """
+    Removes HTML.
+    """
 
     def transform(self, line_number: int, line: lstr) -> Optional[LineGuidance]:
         """

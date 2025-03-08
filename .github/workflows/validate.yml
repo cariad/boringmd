@@ -1,0 +1,90 @@
+name: Validate
+
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches-ignore:
+      - main
+
+env:
+  latest-python-version: 3.13
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.latest-python-version }}
+
+      - uses: snok/install-poetry@v1.4.1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - id: cache
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-${{ env.latest-python-version }}-${{ hashFiles('**/poetry.lock') }}
+          path: .venv
+          restore-keys: |
+            ${{ runner.os }}-${{ env.latest-python-version }}-
+
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: poetry install
+
+      - run: poetry run ./lint.sh
+
+  test:
+    runs-on: ubuntu-24.04
+
+    strategy:
+      matrix:
+        python-version:
+          # We don't support Python 3.8
+          - "3.9"
+          - "3.10"
+          - "3.11"
+          - "3.12"
+          - "3.13"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - uses: snok/install-poetry@v1.4.1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - id: cache
+        uses: actions/cache@v4
+        with:
+          key: ${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          path: .venv
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.python-version }}-
+
+      - if: steps.cache.outputs.cache-hit != 'true'
+        run: poetry install
+
+      - run: poetry run pytest
+
+      - name: Build the package
+        run: poetry build
+
+      - name: Install the package
+        run: pip install "$(ls ./dist/*.whl)"
+
+      - run: |
+          boringmd ./tests/documents/smoke.md > generated.txt
+          cmp ./tests/documents/smoke.txt generated.txt
+
+      - run: |
+          boringmd ./tests/documents/smoke.md --front-matter > generated.yml
+          cmp ./tests/documents/smoke.yml generated.yml

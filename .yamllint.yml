@@ -5,7 +5,4 @@ ignore: |
 
 rules:
   document-start: disable
-  line-length:
-    allow-non-breakable-inline-mappings: true
-    allow-non-breakable-words: true
-    max: 80
+  line-length: disable

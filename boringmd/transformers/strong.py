@@ -7,7 +7,9 @@ from boringmd.transformers.transformer import Transformer
 
 
 class StrongTransformer(Transformer):
-    """ Removes strong markup. """
+    """
+    Removes strong markup.
+    """
 
     def transform(self, line_number: int, line: lstr) -> Optional[LineGuidance]:
         """

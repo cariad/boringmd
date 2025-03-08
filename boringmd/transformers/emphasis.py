@@ -7,7 +7,9 @@ from boringmd.transformers.transformer import Transformer
 
 
 class EmphasisTransformer(Transformer):
-    """ Removes emphasis. """
+    """
+    Removes emphasis.
+    """
 
     def transform(self, line_number: int, line: lstr) -> Optional[LineGuidance]:
         """

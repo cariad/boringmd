@@ -46,7 +46,7 @@ def front_matter_from_string(md: str) -> Optional[str]:
     if not delimiter:
         return None
 
-    pattern = fr"{delimiter.pattern}\s([^{delimiter.pattern}]+)\s{delimiter.pattern}"
+    pattern = rf"{delimiter.pattern}\s([^{delimiter.pattern}]+)\s{delimiter.pattern}"
     logger.debug("Pattern: %s", pattern)
 
     found = match(pattern, md, RegexFlag.DOTALL + RegexFlag.MULTILINE)

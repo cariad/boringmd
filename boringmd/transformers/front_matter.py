@@ -9,7 +9,9 @@ from boringmd.transformers.transformer import Transformer
 
 
 class FrontMatterTransformer(Transformer):
-    """ Removes front matter. """
+    """
+    Removes front matter.
+    """
 
     def __init__(self) -> None:
         self.inside: Optional[str] = None
