@@ -79,3 +79,16 @@ jobs:
         run: poetry install
 
       - run: poetry run pytest
+
+      - run: |
+          pipenv run build
+          pip install "$(ls ./dist/*.whl)"
+          boringmd --version
+
+      - run: |
+          boringmd ./tests/documents/smoke.md > generated.txt
+          cmp ./tests/documents/smoke.txt generated.txt
+
+      - run: |
+          boringmd ./tests/documents/smoke.md --front-matter > generated.yml
+          cmp ./tests/documents/smoke.yml generated.yml
