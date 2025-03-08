@@ -22,7 +22,9 @@ jobs:
 
       - uses: snok/install-poetry@v1.4.1
 
-      - run: poetry run ./scripts/lint.sh
+      - run: |
+          poetry install
+          poetry run ./scripts/lint.sh
 
   test:
     runs-on: ubuntu-24.04
@@ -47,4 +49,6 @@ jobs:
 
       - uses: snok/install-poetry@v1.4.1
 
-      - run: pipenv run pytest
+      - run: |
+          poetry install
+          pipenv run pytest
