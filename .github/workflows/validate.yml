@@ -35,7 +35,7 @@ jobs:
       - if: steps.cache.outputs.cache-hit != 'true'
         run: poetry install
 
-      - run: poetry run ./scripts/lint.sh
+      - run: poetry run ./lint.sh
 
   test:
     runs-on: ubuntu-24.04
