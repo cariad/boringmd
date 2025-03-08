@@ -1,0 +1,46 @@
+name: Validate
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          cache: pipenv
+          python-version: 3.13
+
+      - run: pipenv run lint
+
+  test:
+    runs-on: ubuntu-24.04
+
+    strategy:
+      matrix:
+        python-version:
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+          - "3.12"
+          - "3.13"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          cache: pipenv
+          python-version: ${{ matrix.python-version }}
+
+      - run: pipenv run test
