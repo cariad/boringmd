@@ -15,7 +15,10 @@ __all__ = ["chain"]
 
 
 def chain() -> List[Transformer]:
-    """ Returns an ordered list of transformers. """
+    """
+    Returns an ordered list of transformers.
+    """
+
     return [
         FrontMatterTransformer(),
         IndentedCodeTransformer(),

@@ -7,7 +7,9 @@ from boringmd.transformers.transformer import Transformer
 
 
 class HeadingTransformer(Transformer):
-    """ Removes heading markup. """
+    """
+    Removes heading markup.
+    """
 
     def transform(self, line_number: int, line: lstr) -> Optional[LineGuidance]:
         """

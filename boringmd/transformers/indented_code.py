@@ -7,7 +7,9 @@ from boringmd.transformers.transformer import Transformer
 
 
 class IndentedCodeTransformer(Transformer):
-    """ Locks indented code from transformation. """
+    """
+    Locks indented code from transformation.
+    """
 
     def __init__(self) -> None:
         self.consider_next = False

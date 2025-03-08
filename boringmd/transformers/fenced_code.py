@@ -8,7 +8,9 @@ from boringmd.transformers.transformer import Transformer
 
 
 class FencedCodeTransformer(Transformer):
-    """ Removes fences from fenced code. """
+    """
+    Removes fences from fenced code.
+    """
 
     def __init__(self) -> None:
         self.inside: Optional[int] = None

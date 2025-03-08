@@ -7,7 +7,9 @@ from boringmd.transformers.transformer import Transformer
 
 
 class InlineCodeTransformer(Transformer):
-    """ Removes fences from inline code. """
+    """
+    Removes fences from inline code.
+    """
 
     def transform(self, line_number: int, line: lstr) -> Optional[LineGuidance]:
         """

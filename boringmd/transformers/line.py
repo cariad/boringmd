@@ -7,7 +7,9 @@ from boringmd.transformers.transformer import Transformer
 
 
 class LineTransformer(Transformer):
-    """ Removes lines. """
+    """
+    Removes lines.
+    """
 
     def __init__(self) -> None:
         self.previous_was_line = False

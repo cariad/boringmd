@@ -7,14 +7,19 @@ from boringmd.line_guidance import LineGuidance
 
 
 class Transformer(ABC):
-    """ Base implementation for a line transformer. """
+    """
+    Base implementation for a line transformer.
+    """
 
     def __init__(self) -> None:
         pass
 
     @property
     def name(self) -> str:
-        """ Gets the name of this transformer. """
+        """
+        Gets the name of this transformer.
+        """
+
         return self.__class__.__name__
 
     @abstractmethod
